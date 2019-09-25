@@ -72,7 +72,12 @@
             <artifactId>spring-boot-starter-dubbo</artifactId>
         </dependency>
 
-
+        <!-- https://mvnrepository.com/artifact/cn.bestwu/fastdfs-client-java -->
+        <dependency>
+            <groupId>cn.bestwu</groupId>
+            <artifactId>fastdfs-client-java</artifactId>
+            <version>1.27</version>
+        </dependency>
 
     </dependencies>
 
