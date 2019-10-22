@@ -8,7 +8,7 @@ import com.atguigu.gmall.bean.PmsProductSaleAttrValue;
 import com.atguigu.gmall.manage.mapper.PmsProductImageMapper;
 import com.atguigu.gmall.manage.mapper.PmsProductInfoMapper;
 import com.atguigu.gmall.manage.mapper.PmsProductSaleAttrMapper;
-import com.atguigu.gmall.manage.mapper.pmsProductSaleAttrValueMapper;
+import com.atguigu.gmall.manage.mapper.PmsProductSaleAttrValueMapper;
 import com.atguigu.gmall.service.SpuService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -23,7 +23,7 @@ public class SpuServiceImpl implements SpuService {
     @Autowired
     private PmsProductSaleAttrMapper pmsProductSaleAttrMapper;
     @Autowired
-    private pmsProductSaleAttrValueMapper pmsProductSaleAttrValueMapper;
+    private PmsProductSaleAttrValueMapper pmsProductSaleAttrValueMapper;
 
     @Override
     public List<PmsProductInfo> getSpuList(String catalog3Id) {
@@ -67,6 +67,7 @@ public class SpuServiceImpl implements SpuService {
 
     @Override
     public List<PmsProductSaleAttr> getSaleAttrByProductId(String spuId) {
+
         PmsProductSaleAttr pmsProductSaleAttr = new PmsProductSaleAttr();
         pmsProductSaleAttr.setProductId(spuId);
         List<PmsProductSaleAttr> pmsProductSaleAttrList= pmsProductSaleAttrMapper.select(pmsProductSaleAttr);
@@ -74,11 +75,13 @@ public class SpuServiceImpl implements SpuService {
         for (PmsProductSaleAttr productSaleAttr : pmsProductSaleAttrList) {
             String productId = productSaleAttr.getProductId();
             PmsProductSaleAttrValue pmsProductSaleAttrValue = new PmsProductSaleAttrValue();
+
             pmsProductSaleAttrValue.setProductId(productId);
+            pmsProductSaleAttrValue.setSaleAttrId(productSaleAttr.getSaleAttrId());
+
             List<PmsProductSaleAttrValue> pmsProductSaleAttrValues = pmsProductSaleAttrValueMapper.select(pmsProductSaleAttrValue);
             productSaleAttr.setSpuSaleAttrValueList(pmsProductSaleAttrValues);
         }
-
 
         return pmsProductSaleAttrList;
     }
@@ -88,5 +91,28 @@ public class SpuServiceImpl implements SpuService {
         PmsProductImage pmsProductImage = new PmsProductImage();
         pmsProductImage.setProductId(spuId);
         return pmsProductImageMapper.select(pmsProductImage);
+    }
+
+    @Override
+    public List<PmsProductSaleAttr> getSpuSaleAttrListCheckBySku(String productId,String skuId) {
+//        PmsProductSaleAttr pmsProductSaleAttr = new PmsProductSaleAttr();
+//        pmsProductSaleAttr.setProductId(productId);
+//        List<PmsProductSaleAttr> pmsProductSaleAttrList = pmsProductSaleAttrMapper.select(pmsProductSaleAttr);
+//
+//        for (PmsProductSaleAttr productSaleAttr : pmsProductSaleAttrList) {
+//            String saleAttrId = productSaleAttr.getSaleAttrId();
+//
+//            PmsProductSaleAttrValue pmsProductSaleAttrValue = new PmsProductSaleAttrValue();
+//            pmsProductSaleAttrValue.setSaleAttrId(saleAttrId);
+//            pmsProductSaleAttrValue.setProductId(productId);
+//            List<PmsProductSaleAttrValue> pmsProductSaleAttrValues = pmsProductSaleAttrValueMapper.select(pmsProductSaleAttrValue);
+//
+//            productSaleAttr.setSpuSaleAttrValueList(pmsProductSaleAttrValues);
+//        }
+
+        List<PmsProductSaleAttr> pmsProductSaleAttrList = pmsProductSaleAttrMapper.getSpuSaleAttrListCheckBySku(productId,skuId);
+
+
+        return pmsProductSaleAttrList;
     }
 }

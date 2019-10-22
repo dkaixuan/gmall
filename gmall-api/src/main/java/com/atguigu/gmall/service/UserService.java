@@ -11,4 +11,16 @@ public interface UserService {
     List<UmsMember> getAll();
 
     List<UmsMemberReceiveAddress> getReceiveAddressByMemberId(String memberId);
+
+    UmsMember login(UmsMember umsMember);
+
+    void addUserToken(String token, String memberId);
+
+    UmsMember addOauthUser(UmsMember umsMember);
+
+    UmsMember checkOauthMember(UmsMember umsMember);
+
+    void updateOuathMember(UmsMember umsMember);
+
+    UmsMemberReceiveAddress getReceiveAddressById(String receiveAddressId);
 }

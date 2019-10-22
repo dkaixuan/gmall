@@ -5,6 +5,7 @@ import com.atguigu.gmall.bean.PmsBaseAttrValue;
 import com.atguigu.gmall.bean.PmsBaseSaleAttr;
 import com.atguigu.gmall.manage.mapper.AttrInfoMapper;
 import com.atguigu.gmall.manage.mapper.AttrValueMapper;
+import com.atguigu.gmall.manage.mapper.PmsBaseAttrInfoMapper;
 import com.atguigu.gmall.manage.mapper.PmsBaseSaleAttrMapper;
 import com.atguigu.gmall.service.AttrService;
 import org.apache.commons.lang3.StringUtils;
@@ -13,6 +14,7 @@ import tk.mybatis.mapper.entity.Example;
 
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class AttrServiceImpl implements AttrService {
@@ -23,6 +25,8 @@ public class AttrServiceImpl implements AttrService {
     private AttrValueMapper attrValueMapper;
     @Autowired
     private PmsBaseSaleAttrMapper pmsBaseSaleAttrMapper;
+    @Autowired
+    private PmsBaseAttrInfoMapper pmsBaseAttrInfoMapper;
 
 
     @Override
@@ -90,6 +94,15 @@ public class AttrServiceImpl implements AttrService {
     @Override
     public List<PmsBaseSaleAttr> getAll() {
         return pmsBaseSaleAttrMapper.selectAll();
+    }
+
+    @Override
+    public List<PmsBaseAttrInfo> getAttrValueListByValueId(Set<String> valueIdSet) {
+        String valueIdStr = StringUtils.join(valueIdSet,",");
+
+        List<PmsBaseAttrInfo> baseAttrInfoList= pmsBaseAttrInfoMapper.selectAttrInfoByValueId(valueIdStr);
+
+        return baseAttrInfoList;
     }
 
 

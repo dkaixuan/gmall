@@ -5,7 +5,7 @@ import com.atguigu.gmall.bean.PmsProductImage;
 import com.atguigu.gmall.bean.PmsProductInfo;
 import com.atguigu.gmall.bean.PmsProductSaleAttr;
 import com.atguigu.gmall.service.SpuService;
-import com.atguigu.gmall.util.UploadUtil;
+import com.atguigu.gmall.webutil.util.UploadUtil;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -55,6 +55,8 @@ public class SpuController {
       List<PmsProductSaleAttr> pmsProductSaleAttrList=spuService.getSaleAttrByProductId(spuId);
         return pmsProductSaleAttrList;
     }
+
+
     @RequestMapping("spuImageList")
     public List<PmsProductImage> spuImageList(@RequestParam("spuId") String spuId) {
      List<PmsProductImage> pmsProductImageList=spuService.getSpuImageList(spuId);

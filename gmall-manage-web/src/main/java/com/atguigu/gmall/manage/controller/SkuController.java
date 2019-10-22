@@ -22,7 +22,7 @@ public class SkuController {
 
         String skuDefaultImg = pmsSkuInfo.getSkuDefaultImg();
         if (StringUtils.isBlank(skuDefaultImg)) {
-            pmsSkuInfo.setSkuDefaultImg(pmsSkuInfo.getSkuImageList().get(0).getImgUrl());
+            pmsSkuInfo.setSkuDefaultImg(pmsSkuInfo.getSkuImageList().get(1).getImgUrl());
         }
 
 
